@@ -1,0 +1,70 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct queue
+{
+    int size;
+    int front;
+    int rear;
+    int *arr;
+};
+void enqueue(struct queue *q)
+{
+    if(q->rear==q->size-1)
+    {
+        printf("Queue is full !!\n");
+    }
+    else
+    {
+        q->rear++;
+        printf("Enter data : ");
+        scanf("%d",&q->arr[q->rear]);
+    }
+}
+void dequeue(struct queue *q)
+{
+    int x;
+    if(q->rear==q->front)
+    {
+        printf("Queue is Empty !!");
+    }
+    else
+    {
+        q->front++;
+        printf("dequeued element is : %d\n",q->arr[q->front]);
+    }
+}
+void display(struct queue *q)
+{
+    int x=q->front+1;
+    int y=q->rear;
+    // printf("x=%d",x);
+    // printf("y=%d\n",y);
+    while(x!=y+1)
+    {
+        // printf("x=%d",x);
+        // printf("y=%d",y);
+        printf("%d ",q->arr[x]);
+        x++;
+    }
+    printf("\n");
+}
+int main()
+{
+    struct queue q;
+    printf("Enter size of queue : ");
+    scanf("%d",&q.size);
+    q.front=q.rear=-1;
+    q.arr=(int *)malloc(q.size*sizeof(int));
+    enqueue(&q);
+    enqueue(&q);
+    enqueue(&q);
+    enqueue(&q);
+    enqueue(&q);
+    enqueue(&q);
+    printf("Queue after enqueue : ");
+    display(&q);
+    dequeue(&q);
+    printf("Queue after dequeue : ");
+    display(&q);
+    return 0;
+}
